@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONE.MOMENT — Wedding Content Creator, Wonosobo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#15100c;
+    --bg-elevated:#1d1610;
+    --bg-card:#221a13;
+    --gold:#c9a15c;
+    --gold-bright:#e6c688;
+    --cream:#f3e9da;
+    --muted:#a3907a;
+    --muted-dim:#6e5f4e;
+    --rust:#9a5142;
+    --line:rgba(201,161,92,0.16);
+    --line-strong:rgba(201,161,92,0.32);
+    --shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{font-family:'Fraunces', serif; margin:0; font-weight:500; letter-spacing:-0.01em;}
+  .mono{font-family:'Space Mono', monospace; letter-spacing:0.08em; text-transform:uppercase;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  section{position:relative;}
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:radial-gradient(circle at 1px 1px, rgba(243,233,218,0.035) 1px, transparent 0);
+    background-size:3px 3px;
+    pointer-events:none;
+    z-index:1;
+  }
+
+  /* ===== NAV ===== */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(21,16,12,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    max-width:1180px; margin:0 auto;
+  }
+  .logo{
+    font-family:'Fraunces', serif; font-size:19px; letter-spacing:0.02em; font-weight:600;
+    display:flex; flex-direction:column; line-height:1.1;
+  }
+  .logo .dot{color:var(--gold);}
+  .logo .tagline{
+    font-family:'Space Mono',monospace; font-size:8.5px; letter-spacing:0.14em; color:var(--muted-dim);
+    text-transform:uppercase; margin-top:3px; font-weight:400;
+  }
+  nav.links{display:flex; gap:30px; align-items:center;}
+  nav.links a{
+    font-size:13px; color:var(--muted); transition:color .2s ease;
+    font-family:'Space Mono', monospace; letter-spacing:0.04em;
+  }
+  nav.links a:hover{color:var(--gold-bright);}
+  .nav-cta{
+    background:var(--gold); color:#1a1410; padding:9px 18px; border-radius:2px;
+    font-size:13px; font-weight:600; font-family:'Work Sans',sans-serif;
+    transition:background .2s ease;
+  }
+  .nav-cta:hover{background:var(--gold-bright);}
+
+  /* ===== HERO ===== */
+  .hero{padding:80px 0 56px; overflow:hidden;}
+  .hero-inner{display:grid; grid-template-columns:1.05fr 0.95fr; gap:50px; align-items:center;}
+  .eyebrow{
+    font-family:'Space Mono', monospace; font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--gold); display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold);}
+  .hero h1{font-size:clamp(32px, 4vw, 52px); line-height:1.1; color:var(--cream);}
+  .hero h1 em{font-style:italic; color:var(--gold-bright);}
+  .hero p.lead{margin-top:22px; font-size:16.5px; color:var(--muted); max-width:460px; line-height:1.75;}
+  .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--gold); color:#1a1410; padding:14px 26px; border-radius:2px;
+    font-weight:600; font-size:14.5px; display:inline-flex; align-items:center; gap:8px;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .btn-primary:hover{background:var(--gold-bright); transform:translateY(-1px);}
+  .btn-ghost{
+    border:1px solid var(--line-strong); color:var(--cream); padding:14px 26px; border-radius:2px;
+    font-weight:500; font-size:14.5px; transition: border-color .2s ease, color .2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold-bright);}
+  .hero-stats{display:flex; gap:34px; margin-top:42px; padding-top:26px; border-top:1px solid var(--line); flex-wrap:wrap;}
+  .hero-stat .num{font-family:'Fraunces',serif; font-size:24px; color:var(--gold-bright);}
+  .hero-stat .label{font-family:'Space Mono',monospace; font-size:10px; color:var(--muted-dim); text-transform:uppercase; letter-spacing:0.07em; margin-top:4px;}
+
+  .phone-stack{position:relative; height:520px;}
+  .phone{
+    position:absolute; width:212px; aspect-ratio:9/19.5;
+    background:linear-gradient(160deg,#2a2019,#171009);
+    border-radius:26px; padding:7px;
+    box-shadow:var(--shadow), inset 0 0 0 1px rgba(201,161,92,0.15);
+  }
+  .phone-screen{width:100%; height:100%; border-radius:20px; overflow:hidden; position:relative; background:#0e0b08;}
+  .phone-screen img{width:100%; height:100%; object-fit:cover; opacity:0.9;}
+  .phone .chrome-top{
+    position:absolute; top:10px; left:0; right:0; display:flex; justify-content:space-between; padding:0 16px;
+    font-family:'Space Mono',monospace; font-size:9px; color:rgba(243,233,218,0.85); z-index:3;
+    text-shadow:0 1px 3px rgba(0,0,0,0.6);
+  }
+  .phone-1{ top:0; left:8%; transform:rotate(-7deg); z-index:2;}
+  .phone-2{ top:56px; right:2%; transform:rotate(6deg); z-index:3; width:230px;}
+  .phone-3{ bottom:0; left:24%; transform:rotate(-3deg); z-index:1; opacity:0.6; width:192px;}
+  .phone-scrim{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 45%, rgba(10,7,4,0.9) 100%); z-index:2;}
+  .phone-label{
+    position:absolute; bottom:14px; left:12px; right:12px; z-index:3;
+    font-family:'Space Mono',monospace; font-size:9.5px; color:var(--cream);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .live-badge{
+    position:absolute; top:30px; left:12px; z-index:3;
+    background:var(--rust); color:var(--cream); font-family:'Space Mono',monospace;
+    font-size:8.5px; letter-spacing:0.08em; padding:3px 7px; border-radius:2px;
+    display:flex; align-items:center; gap:5px;
+  }
+  .live-dot{width:5px;height:5px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.25;}}
+
+  /* ===== STRIP ===== */
+  .strip{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bg-elevated);}
+  .strip-inner{display:grid; grid-template-columns:repeat(3,1fr);}
+  .strip-item{padding:32px 28px; border-right:1px solid var(--line);}
+  .strip-item:last-child{border-right:none;}
+  .strip-item .mono-tag{font-family:'Space Mono',monospace; font-size:11px; color:var(--gold); letter-spacing:0.08em;}
+  .strip-item h3{font-size:18.5px; margin-top:10px; color:var(--cream); font-weight:500;}
+  .strip-item p{font-size:13.5px; color:var(--muted); margin-top:8px;}
+
+  /* ===== SECTION HEADERS ===== */
+  .section-pad{padding:92px 0;}
+  .section-head{max-width:620px; margin-bottom:50px;}
+  .section-head .eyebrow{margin-bottom:16px;}
+  .section-head h2{font-size:clamp(27px,3vw,37px); color:var(--cream);}
+  .section-head p{color:var(--muted); margin-top:14px; font-size:15px;}
+
+  /* ===== PORTFOLIO ===== */
+  .filter-tabs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px;}
+  .tab{
+    font-family:'Space Mono',monospace; font-size:11.5px; letter-spacing:0.06em; text-transform:uppercase;
+    padding:9px 16px; border:1px solid var(--line-strong); border-radius:20px; color:var(--muted);
+    cursor:pointer; transition:all .2s ease; background:none;
+  }
+  .tab.active, .tab:hover{border-color:var(--gold); color:var(--gold-bright); background:rgba(201,161,92,0.08);}
+  .portfolio-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px;}
+  .p-card{aspect-ratio:9/16; border-radius:8px; position:relative; overflow:hidden; cursor:pointer; transition:transform .3s ease;}
+  .p-card:hover{transform:translateY(-6px);}
+  .p-card img{width:100%; height:100%; object-fit:cover;}
+  .p-card .overlay{
+    position:absolute; inset:0; padding:13px;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(10,7,4,0.88) 100%);
+  }
+  .p-card .tag{font-family:'Space Mono',monospace; font-size:9px; color:var(--gold-bright); letter-spacing:0.06em;}
+  .p-card .title{font-family:'Fraunces',serif; font-size:13.5px; color:var(--cream); line-height:1.25; margin-top:3px;}
+  .portfolio-note{margin-top:22px; font-size:12.5px; color:var(--muted-dim); font-family:'Space Mono',monospace;}
+  .ig-cta{margin-top:34px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+  .ig-cta a{color:var(--gold-bright); font-weight:500; border-bottom:1px solid var(--gold); padding-bottom:2px;}
+
+  /* ===== WHY HIRE US ===== */
+  .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .why-card{background:var(--bg-card); border:1px solid var(--line); border-radius:6px; padding:32px 28px;}
+  .why-card .num{font-family:'Space Mono',monospace; font-size:11px; color:var(--gold); letter-spacing:0.08em;}
+  .why-card h3{font-size:18px; margin-top:14px; color:var(--cream);}
+  .why-card p{font-size:13.5px; color:var(--muted); margin-top:12px; line-height:1.7;}
+
+  /* ===== PACKAGES ===== */
+  .pkg-toggle{display:flex; gap:8px; margin-bottom:40px;}
+  .pkg-tab{
+    font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.06em; text-transform:uppercase;
+    padding:11px 22px; border:1px solid var(--line-strong); border-radius:2px; color:var(--muted); cursor:pointer;
+    background:none; transition:all .2s ease;
+  }
+  .pkg-tab.active{border-color:var(--gold); color:#1a1410; background:var(--gold); font-weight:700;}
+  .pkg-panel{display:none;}
+  .pkg-panel.active{display:block;}
+  .pkg-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:18px; align-items:stretch;}
+  .pkg-card{background:var(--bg-card); border:1px solid var(--line); border-radius:8px; padding:28px 24px; display:flex; flex-direction:column;}
+  .pkg-card.featured{border-color:var(--gold); box-shadow:0 0 0 1px var(--gold), var(--shadow); position:relative;}
+  .pkg-badge{
+    position:absolute; top:-13px; left:24px; background:var(--gold); color:#1a1410;
+    font-family:'Space Mono',monospace; font-size:9.5px; letter-spacing:0.06em; padding:5px 11px; border-radius:20px; font-weight:700;
+  }
+  .pkg-name{font-family:'Fraunces',serif; font-size:20px; color:var(--cream);}
+  .pkg-scope{font-size:11.5px; color:var(--muted-dim); margin-top:6px; font-style:italic; min-height:32px;}
+  .pkg-price{font-family:'Fraunces',serif; font-size:26px; color:var(--gold-bright); margin-top:14px;}
+  .pkg-price span{font-family:'Space Mono',monospace; font-size:10px; color:var(--muted-dim); text-transform:uppercase; margin-left:4px;}
+  .pkg-list{list-style:none; padding:0; margin:20px 0; flex:1;}
+  .pkg-list li{font-size:12.8px; color:var(--cream); padding:8px 0; border-top:1px solid var(--line); display:flex; gap:8px; align-items:flex-start;}
+  .pkg-list li:first-child{border-top:none;}
+  .pkg-list li::before{content:"—"; color:var(--gold); flex-shrink:0;}
+  .pkg-cta{
+    text-align:center; padding:12px; border:1px solid var(--line-strong); border-radius:2px; font-size:13.5px; font-weight:500;
+    transition:all .2s ease;
+  }
+  .pkg-card.featured .pkg-cta{background:var(--gold); color:#1a1410; border-color:var(--gold); font-weight:600;}
+  .pkg-cta:hover{border-color:var(--gold); color:var(--gold-bright);}
+  .pkg-card.featured .pkg-cta:hover{background:var(--gold-bright);}
+
+  .addons{margin-top:56px; border-top:1px solid var(--line); padding-top:44px;}
+  .addons-head{font-family:'Space Mono',monospace; font-size:12px; color:var(--gold); letter-spacing:0.08em; margin-bottom:20px;}
+  .addons-list{display:grid; grid-template-columns:1fr 1fr; gap:0 40px;}
+  .addon-row{display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid var(--line); font-size:13.5px;}
+  .addon-row .name{color:var(--cream);}
+  .addon-row .note{display:block; font-size:11px; color:var(--muted-dim); margin-top:2px;}
+  .addon-row .price{font-family:'Space Mono',monospace; color:var(--gold-bright); white-space:nowrap;}
+
+  /* ===== FAQ ===== */
+  .faq-list{max-width:760px;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{padding:24px 0; display:flex; justify-content:space-between; align-items:center; gap:20px; cursor:pointer; font-size:16px; color:var(--cream); font-family:'Fraunces',serif;}
+  .faq-q .icon{color:var(--gold); font-size:20px; font-family:'Work Sans',sans-serif; transition:transform .25s ease; flex-shrink:0;}
+  .faq-item.open .icon{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .3s ease, padding .3s ease; font-size:14px; color:var(--muted); line-height:1.75;}
+  .faq-item.open .faq-a{max-height:260px; padding-bottom:22px;}
+
+  /* ===== TERMS ===== */
+  .terms-section{background:var(--bg-elevated); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .terms-list{columns:2; column-gap:40px; max-width:980px;}
+  .terms-list li{font-size:13px; color:var(--muted); margin-bottom:14px; line-height:1.65; break-inside:avoid;}
+  .terms-list li b{color:var(--cream); font-weight:600;}
+
+  /* ===== CONTACT ===== */
+  .contact-section{background:var(--bg-elevated); border-top:1px solid var(--line);}
+  .contact-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:60px;}
+  .contact-info h2{font-size:clamp(26px,3vw,34px);}
+  .contact-info p{color:var(--muted); margin-top:16px; font-size:15px; max-width:400px;}
+  .wa-box{margin-top:30px; background:var(--bg-card); border:1px solid var(--line); border-radius:8px; padding:26px;}
+  .wa-box .mono{font-size:11px; color:var(--gold);}
+  .wa-box p{font-size:14px; color:var(--cream); margin:10px 0 18px; max-width:none;}
+  .wa-btn{display:inline-flex; align-items:center; gap:10px; background:#2f5d4a; color:#eef4ee; padding:13px 22px; border-radius:2px; font-weight:600; font-size:14px; transition:background .2s ease;}
+  .wa-btn:hover{background:#376e58;}
+  .contact-meta{margin-top:30px; display:flex; flex-direction:column; gap:12px;}
+  .contact-meta div{display:flex; gap:12px; font-size:13.5px; color:var(--muted);}
+  .contact-meta span.k{font-family:'Space Mono',monospace; color:var(--muted-dim); min-width:82px; font-size:11px; text-transform:uppercase; padding-top:2px; flex-shrink:0;}
+  .travel-areas{margin-top:26px; padding-top:22px; border-top:1px solid var(--line);}
+  .travel-areas .k{font-family:'Space Mono',monospace; color:var(--muted-dim); font-size:11px; text-transform:uppercase; display:block; margin-bottom:10px;}
+  .area-pills{display:flex; flex-wrap:wrap; gap:8px;}
+  .area-pill{font-size:12px; color:var(--muted); border:1px solid var(--line); padding:5px 12px; border-radius:20px;}
+
+  form.contact-form{background:var(--bg-card); border:1px solid var(--line); border-radius:8px; padding:34px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+  .field{display:flex; flex-direction:column; gap:7px; margin-bottom:16px;}
+  .field label{font-family:'Space Mono',monospace; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted);}
+  .field input, .field select, .field textarea{
+    background:#171109; border:1px solid var(--line-strong); border-radius:4px; padding:12px 14px;
+    color:var(--cream); font-family:'Work Sans',sans-serif; font-size:14px; outline:none; transition:border-color .2s ease; width:100%;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--gold);}
+  .field textarea{resize:vertical; min-height:90px;}
+  .submit-btn{width:100%; background:var(--gold); color:#1a1410; border:none; padding:15px; border-radius:2px; font-weight:600; font-size:14.5px; cursor:pointer; transition:background .2s ease; font-family:'Work Sans',sans-serif;}
+  .submit-btn:hover{background:var(--gold-bright);}
+  .form-note{font-size:11.5px; color:var(--muted-dim); margin-top:12px; text-align:center;}
+
+  /* ===== FOOTER ===== */
+  footer{padding:40px 0;}
+  .footer-inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .footer-inner .mono{font-size:11px; color:var(--muted-dim);}
+  .footer-links{display:flex; gap:20px; flex-wrap:wrap;}
+  .footer-links a{font-size:13px; color:var(--muted); transition:color .2s ease;}
+  .footer-links a:hover{color:var(--gold-bright);}
+
+  @media (max-width:980px){
+    nav.links{display:none;}
+    .hero-inner{grid-template-columns:1fr;}
+    .phone-stack{height:400px; margin:0 auto; max-width:340px;}
+    .strip-inner{grid-template-columns:1fr;}
+    .strip-item{border-right:none; border-bottom:1px solid var(--line);}
+    .portfolio-grid{grid-template-columns:repeat(3,1fr);}
+    .why-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr; gap:40px;}
+    .form-row{grid-template-columns:1fr;}
+    .terms-list{columns:1;}
+    .addons-list{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .portfolio-grid{grid-template-columns:repeat(2,1fr);}
+    .hero-stats{flex-wrap:wrap; row-gap:20px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+    html{scroll-behavior:auto;}
+  }
+  :focus-visible{outline:2px solid var(--gold-bright); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo">ONE<span class="dot">.</span>MOMENT<span class="tagline">Make Your Moment Memoreable</span></div>
+    <nav class="links">
+      <a href="#portfolio">Portofolio</a>
+      <a href="#kenapa">Kenapa Kami</a>
+      <a href="#paket">Paket</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+    <a href="#kontak" class="nav-cta">Booking Sekarang</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow">One Moment Content Creator — Wonosobo</div>
+      <h1>Behind every great wedding,<br>ada momen yang <em>terjadi dalam sekejap mata.</em></h1>
+      <p class="lead">Kami rekam tawa kecil saat makeup pagi hari, genggaman tangan yang gugup sebelum akad, hingga tangis haru di pelaminan — lalu kirimkan semuanya lewat Instagram Story real-time dan Google Drive permanen dalam 1x24 jam.</p>
+      <div class="hero-ctas">
+        <a href="#kontak" class="btn-primary">Chat via WhatsApp →</a>
+        <a href="#portfolio" class="btn-ghost">Lihat Portofolio</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">1x24 Jam</div><div class="label">File Dikirim via Drive</div></div>
+        <div class="hero-stat"><div class="num">iPhone 14–15 Pro</div><div class="label">Kualitas Sinematik</div></div>
+        <div class="hero-stat"><div class="num">12 Kota</div><div class="label">Siap Traveling</div></div>
+      </div>
+    </div>
+
+    <div class="phone-stack" aria-hidden="true">
+      <div class="phone phone-3">
+        <div class="phone-screen">
+          <img src="assets/portfolio-6.jpg" alt="">
+          <div class="phone-scrim"></div>
+          <div class="chrome-top"><span>09:41</span><span>●●●</span></div>
+          <div class="phone-label"><span>VENUE B-ROLL</span></div>
+        </div>
+      </div>
+      <div class="phone phone-1">
+        <div class="phone-screen">
+          <img src="assets/portfolio-2.jpg" alt="">
+          <div class="phone-scrim"></div>
+          <div class="chrome-top"><span>09:41</span><span>●●●</span></div>
+          <div class="phone-label"><span>BTS — OUTDOOR</span></div>
+        </div>
+      </div>
+      <div class="phone phone-2">
+        <div class="phone-screen">
+          <img src="assets/portfolio-3.jpg" alt="">
+          <div class="phone-scrim"></div>
+          <div class="chrome-top"><span>09:41</span><span>●●●</span></div>
+          <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+          <div class="phone-label"><span>PROSESI AKAD</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap strip-inner">
+    <div class="strip-item">
+      <div class="mono-tag">Device</div>
+      <h3>Direkam pakai iPhone 14–15 Pro</h3>
+      <p>Kualitas video jernih dan sinematik, tanpa terlihat seperti kamera besar yang mengganggu momen.</p>
+    </div>
+    <div class="strip-item">
+      <div class="mono-tag">Live Update</div>
+      <h3>Instagram Takeover real-time</h3>
+      <p>Akun IG kalian dipegang tim selama acara untuk update Story, lalu dikembalikan sepenuhnya setelah selesai.</p>
+    </div>
+    <div class="strip-item">
+      <div class="mono-tag">Pengiriman</div>
+      <h3>Google Drive, 1x24 jam, permanen</h3>
+      <p>Semua file — raw maupun hasil edit — bisa diakses kapan saja, tidak ada batas waktu unduh.</p>
+    </div>
+  </div>
+</div>
+
+<section class="section-pad" id="portfolio">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Portofolio</div>
+      <h2>Momen yang paling sering ditonton ulang</h2>
+      <p>BTS persiapan dan prosesi adat konsisten jadi konten yang paling banyak dibagikan ulang oleh tamu — jadi dua sesi itu kami liput paling detail.</p>
+    </div>
+
+    <div class="filter-tabs">
+      <button class="tab active" data-filter="all">Semua</button>
+      <button class="tab" data-filter="bts">BTS</button>
+      <button class="tab" data-filter="akad">Akad</button>
+      <button class="tab" data-filter="adat">Adat</button>
+      <button class="tab" data-filter="resepsi">Resepsi</button>
+    </div>
+
+    <div class="portfolio-grid">
+      <div class="p-card" data-cat="bts"><img src="assets/portfolio-1.jpg" alt="Sesi outdoor pengantin"><div class="overlay"><span class="tag">BTS</span><div class="title">Outdoor Session</div></div></div>
+      <div class="p-card" data-cat="bts"><img src="assets/portfolio-2.jpg" alt="Bridal portrait outdoor"><div class="overlay"><span class="tag">BTS</span><div class="title">Bridal Portrait</div></div></div>
+      <div class="p-card" data-cat="akad"><img src="assets/portfolio-3.jpg" alt="Prosesi akad adat"><div class="overlay"><span class="tag">AKAD</span><div class="title">Prosesi Akad Adat</div></div></div>
+      <div class="p-card" data-cat="adat"><img src="assets/portfolio-4.jpg" alt="Prosesi adat lengkap"><div class="overlay"><span class="tag">ADAT</span><div class="title">Prosesi Adat</div></div></div>
+      <div class="p-card" data-cat="resepsi"><img src="assets/portfolio-5.jpg" alt="Resepsi malam"><div class="overlay"><span class="tag">RESEPSI</span><div class="title">Resepsi Malam</div></div></div>
+      <div class="p-card" data-cat="bts"><img src="assets/portfolio-6.jpg" alt="Venue tradisional"><div class="overlay"><span class="tag">BTS</span><div class="title">Venue B-roll</div></div></div>
+      <div class="p-card" data-cat="akad"><img src="assets/portfolio-7.jpg" alt="Upacara formal"><div class="overlay"><span class="tag">AKAD</span><div class="title">Upacara Formal</div></div></div>
+      <div class="p-card" data-cat="adat"><img src="assets/portfolio-8.jpg" alt="Prosesi adat keluarga"><div class="overlay"><span class="tag">ADAT</span><div class="title">Prosesi Keluarga</div></div></div>
+      <div class="p-card" data-cat="resepsi"><img src="assets/portfolio-9.jpg" alt="Resepsi pengantin"><div class="overlay"><span class="tag">RESEPSI</span><div class="title">Resepsi Pengantin</div></div></div>
+      <div class="p-card" data-cat="adat"><img src="assets/portfolio-10.jpg" alt="Arak-arakan adat"><div class="overlay"><span class="tag">ADAT</span><div class="title">Arak-arakan Adat</div></div></div>
+    </div>
+
+    <p class="portfolio-note">// foto dari dokumentasi ONE.MOMENT — lihat lebih banyak konten vertikal di Instagram</p>
+    <div class="ig-cta">
+      <span class="mono" style="font-size:12px;color:var(--muted);">Lihat lebih banyak di</span>
+      <a href="https://instagram.com/one.moment.wcc" target="_blank" rel="noopener">@one.moment.wcc ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="kenapa" style="background:var(--bg-elevated); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Kenapa Perlu Hire ONE.MOMENT?</div>
+      <h2>Bukan sekadar dokumentasi tambahan</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="num">01</div>
+        <h3>As Your Professional Bestie</h3>
+        <p>Kami jadi teman yang profesional menangkap momen candid dan genuine sepanjang hari spesial kalian. Tanpa perlu request "video-in aku pas momen ini ya" — kami sudah tahu cara merekam, mengolah, dan mengemasnya jadi video penuh rasa.</p>
+      </div>
+      <div class="why-card">
+        <div class="num">02</div>
+        <h3>No Worries, Just Enjoy Your Day</h3>
+        <p>Tidak perlu menitipkan HP ke keluarga atau sahabat untuk merekam. Biar kami yang dokumentasikan — kalian tinggal masuk frame dan menikmati momennya.</p>
+      </div>
+      <div class="why-card">
+        <div class="num">03</div>
+        <h3>Amplify Your Personal Touch</h3>
+        <p>Semua momen dan emosi yang kalian mau, kami perkuat jadi cerita yang hangat dan personal — lebih dekat dengan kepribadian kalian dan pasangan.</p>
+      </div>
+    </div>
+    <p class="portfolio-note" style="margin-top:32px;">// Content Creator bekerja berdampingan dengan fotografer &amp; videografer utama, bukan sebagai pengganti mereka</p>
+  </div>
+</section>
+
+<section class="section-pad" id="paket">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Paket</div>
+      <h2>Pilih cakupan liputan kalian</h2>
+      <p>Harga belum termasuk biaya transport. Konsultasi online sebelum hari-H untuk menentukan lagu, tren, dan vibe yang diinginkan.</p>
+    </div>
+
+    <div class="pkg-toggle">
+      <button class="pkg-tab active" data-panel="wedding">Wedding Packages</button>
+      <button class="pkg-tab" data-panel="engagement">Engagement Packages</button>
+    </div>
+
+    <div class="pkg-panel active" id="panel-wedding">
+      <div class="pkg-grid">
+        <div class="pkg-card featured">
+          <span class="pkg-badge">Paling Lengkap</span>
+          <div class="pkg-name">Full Wedding Moment</div>
+          <div class="pkg-scope">Preparation, Beauty Shoot, Outdoor, Akad, Adat, Resepsi</div>
+          <div class="pkg-price">850K</div>
+          <ul class="pkg-list">
+            <li>9 jam standby</li>
+            <li>2 crew content creator</li>
+            <li>2 video compilation (1–2 menit)</li>
+            <li>3 video trend TikTok (by request)</li>
+            <li>Unlimited Instagram Story / all moment (edited)</li>
+            <li>Free wedding poster design (file only)</li>
+            <li>Permanent access Google Drive — unlimited videos</li>
+          </ul>
+          <a href="#kontak" class="pkg-cta">Booking Paket Ini</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-name">Exclusive Moment</div>
+          <div class="pkg-scope">Preparation, Beauty Shoot, Outdoor, Akad, Adat, Resepsi</div>
+          <div class="pkg-price">700K</div>
+          <ul class="pkg-list">
+            <li>9 jam standby</li>
+            <li>8 Instagram story (edited)</li>
+            <li>1 video compilation (1–2 menit)</li>
+            <li>2 video trend TikTok (by request)</li>
+            <li>Unlimited raw video (video mentah)</li>
+            <li>Free wedding poster design (file only)</li>
+            <li>Permanent access Google Drive — total 12 video</li>
+          </ul>
+          <a href="#kontak" class="pkg-cta">Booking Paket Ini</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-name">Premium Moment</div>
+          <div class="pkg-scope">Preparation, Beauty Shoot, Outdoor, Akad, Adat, Resepsi</div>
+          <div class="pkg-price">650K</div>
+          <ul class="pkg-list">
+            <li>8 jam standby</li>
+            <li>7 Instagram story (edited)</li>
+            <li>1 video compilation (1–2 menit)</li>
+            <li>2 video trend TikTok (by request)</li>
+            <li>Unlimited raw video (video mentah)</li>
+            <li>Free wedding poster design (file only)</li>
+            <li>Permanent access Google Drive — total 10 video</li>
+          </ul>
+          <a href="#kontak" class="pkg-cta">Booking Paket Ini</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-name">Standart Moment</div>
+          <div class="pkg-scope">Pilih 3: Beauty Shoot / Outdoor / Akad / Adat / Resepsi</div>
+          <div class="pkg-price">550K</div>
+          <ul class="pkg-list">
+            <li>6 jam standby</li>
+            <li>5 Instagram story (edited)</li>
+            <li>1 video compilation (1–2 menit)</li>
+            <li>2 video trend TikTok (by request)</li>
+            <li>Unlimited raw video (video mentah)</li>
+            <li>Free wedding poster design (file only)</li>
+            <li>Permanent access Google Drive — total 8 video</li>
+          </ul>
+          <a href="#kontak" class="pkg-cta">Booking Paket Ini</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-name">Basic Moment</div>
+          <div class="pkg-scope">Hanya: Siraman / Akad / Adat / Resepsi</div>
+          <div class="pkg-price">450K</div>
+          <ul class="pkg-list">
+            <li>4 jam standby</li>
+            <li>3 Instagram story (edited)</li>
+            <li>1 video compilation (1–2 menit)</li>
+            <li>2 video trend TikTok (by request)</li>
+            <li>Unlimited raw video (video mentah)</li>
+            <li>Free wedding poster design (file only)</li>
+            <li>Permanent access Google Drive — total 6 video</li>
+          </ul>
+          <a href="#kontak" class="pkg-cta">Booking Paket Ini</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pkg-panel" id="panel-engagement">
+      <div class="pkg-grid">
+        <div class="pkg-card featured">
+          <span class="pkg-badge">Paling Lengkap</span>
+          <div class="pkg-name">Eternal Moment</div>
+          <div class="pkg-scope">Sesi lamaran / engagement</div>
+          <div class="pkg-price">500K</div>
+          <ul class="pkg-list">
+            <li>6 Instagram story (edited)</li>
+            <li>1 video compilation (1–2 menit)</li>
+            <li>3 video trend TikTok (by request)</li>
+            <li>Unlimited raw video (video mentah)</li>
+            <li>Permanent access Google Drive — total 10 video</li>
+          </ul>
+          <a href="#kontak" class="pkg-cta">Booking Paket Ini</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-name">Love Moment</div>
+          <div class="pkg-scope">Sesi lamaran / engagement</div>
+          <div class="pkg-price">400K</div>
+          <ul class="pkg-list">
+            <li>5 Instagram story (edited)</li>
+            <li>1 video compilation (1–2 menit)</li>
+            <li>2 video trend TikTok (by request)</li>
+            <li>Unlimited raw video (video mentah)</li>
+            <li>Permanent access Google Drive — total 8 video</li>
+          </ul>
+          <a href="#kontak" class="pkg-cta">Booking Paket Ini</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-name">Sweet Moment</div>
+          <div class="pkg-scope">Sesi lamaran / engagement</div>
+          <div class="pkg-price">300K</div>
+          <ul class="pkg-list">
+            <li>3 Instagram story (edited)</li>
+            <li>1 video compilation (1–2 menit)</li>
+            <li>2 video trend TikTok (by request)</li>
+            <li>Unlimited raw video (video mentah)</li>
+            <li>Permanent access Google Drive — total 6 video</li>
+          </ul>
+          <a href="#kontak" class="pkg-cta">Booking Paket Ini</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="addons">
+      <div class="addons-head">Extra Time &amp; Content</div>
+      <div class="addons-list">
+        <div class="addon-row"><span class="name">Flash Disk<span class="note">Buat kamu yang tidak mau ribet download satu-satu di Drive</span></span><span class="price">100K</span></div>
+        <div class="addon-row"><span class="name">Add 1 Crew</span><span class="price">150K</span></div>
+        <div class="addon-row"><span class="name">Add 2 Story / Trend TikTok</span><span class="price">50K</span></div>
+        <div class="addon-row"><span class="name">Add 5 Story</span><span class="price">100K</span></div>
+        <div class="addon-row"><span class="name">Add Extra 1 Jam + Raw</span><span class="price">50K</span></div>
+        <div class="addon-row"><span class="name">Add Extra 1 Jam + Raw + 2 Story</span><span class="price">100K</span></div>
+        <div class="addon-row"><span class="name">Add Highlight Cinematic 4K<span class="note">Video highlight diedit &amp; coloring gaya cinematic (1–2 menit)</span></span><span class="price">100K</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="faq" style="background:var(--bg-elevated); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">FAQ</div>
+      <h2>Yang sering ditanyakan</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q"><span>Apakah semua video diambil dengan smartphone?</span><span class="icon">+</span></div>
+        <div class="faq-a">Ya! ONE.MOMENT pakai device smartphone untuk merekam semua momen dengan kualitas video yang sangat tinggi, sehingga hasilnya jernih dan jelas. Device yang kami pakai iPhone 14–15 Pro.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Instagram takeover itu apa dan bagaimana caranya?</span><span class="icon">+</span></div>
+        <div class="faq-a">Kalian memasukkan akun Instagram sendiri ke device tim hanya selama acara berlangsung, dan kami pegang akun itu untuk posting video yang sudah diedit ke Instagram Story. Akun kalian tetap terjaga — kami secara profesional hanya update Story selama acara berlangsung.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Apa bedanya wedding content creator dengan videografer biasa?</span><span class="icon">+</span></div>
+        <div class="faq-a">Content Creator bekerja berdampingan dengan fotografer dan videografer utama, bukan sebagai pengganti mereka. Fokus kami pada konten vertikal siap tayang di Reels, TikTok, dan Story, dengan update real-time selama acara.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Berapa lama file diterima setelah acara?</span><span class="icon">+</span></div>
+        <div class="faq-a">Semua file kami kirim melalui Google Drive maksimal 1x24 jam setelah acara, dan aksesnya permanen — tidak ada batas waktu unduh.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Apakah ONE.MOMENT melayani acara di luar Wonosobo?</span><span class="icon">+</span></div>
+        <div class="faq-a">Ya, kami siap traveling ke Banjarnegara, Temanggung, Magelang, Yogyakarta, Purbalingga, Batang, Pekalongan, Kebumen, Purworejo, Banyumas, Semarang, dan Cilacap. Harga paket belum termasuk biaya transport.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Bagaimana proses booking dan pembayarannya?</span><span class="icon">+</span></div>
+        <div class="faq-a">Chat kami via WhatsApp dengan tanggal dan lokasi acara. Setelah konfirmasi ketersediaan crew, pembayaran hanya diterima via transfer, dengan pelunasan maksimal H-1 sebelum acara.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad terms-section">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:34px;">
+      <div class="eyebrow">Term &amp; Conditions</div>
+      <h2>Perlu diketahui sebelum booking</h2>
+    </div>
+    <ul class="terms-list">
+      <li><b>Peran Content Creator</b> — bekerja berdampingan dengan fotografer &amp; videografer utama, bukan sebagai pengganti mereka.</li>
+      <li><b>Urutan konten</b> — Story Instagram dibuat per-momen sesuai runtutan acara (Preparation, Beauty Shoot, Outdoor, Akad, Sungkeman, Adat, Resepsi).</li>
+      <li><b>Konsultasi</b> — meeting online sebelum hari-H untuk menentukan lagu, tren, atau vibe yang diinginkan.</li>
+      <li><b>Pengiriman file</b> — dibagikan via Google Drive maksimal 1x24 jam setelah acara dan aksesnya permanen.</li>
+      <li><b>Hak portofolio</b> — semua file bisa digunakan oleh ONE.MOMENT untuk keperluan portofolio.</li>
+      <li><b>Pembayaran</b> — hanya menerima via transfer, dengan pelunasan maksimal H-1 sebelum acara.</li>
+      <li><b>Biaya transport</b> — harga paket di atas belum termasuk biaya transportasi.</li>
+      <li><b>Perubahan jadwal</b> — wajib segera konfirmasi ulang jika ada perubahan jadwal acara.</li>
+      <li><b>Kelebihan durasi</b> — jika melebihi ketentuan paket, akan dikenakan biaya tambahan.</li>
+      <li><b>Pembatalan</b> — jika membatalkan penggunaan jasa, DP dianggap hangus.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section-pad contact-section" id="kontak">
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <div class="eyebrow">Kontak</div>
+      <h2>Let's craft memories!</h2>
+      <p>Kami balas secepatnya dengan detail paket, harga, dan ketersediaan crew di tanggal kalian.</p>
+
+      <div class="wa-box">
+        <div class="mono">Respon Tercepat</div>
+        <p>Chat langsung untuk tanya-tanya atau cek ketersediaan tanggal.</p>
+        <a class="wa-btn" id="waDirectBtn" href="https://wa.me/6281388813483?text=Halo%20ONE.MOMENT%2C%20saya%20ingin%20tanya%20soal%20liputan%20pernikahan." target="_blank" rel="noopener">
+          Chat via WhatsApp ↗
+        </a>
+      </div>
+
+      <div class="contact-meta">
+        <div><span class="k">Lokasi</span><span>Berbasis di Wonosobo, Jawa Tengah</span></div>
+        <div><span class="k">WhatsApp</span><span>0813-8881-3483</span></div>
+        <div><span class="k">Email</span><span>onemomentstudio12@gmail.com</span></div>
+        <div><span class="k">Instagram</span><span><a href="https://instagram.com/one.moment.wcc" target="_blank" rel="noopener">@one.moment.wcc</a></span></div>
+        <div><span class="k">TikTok</span><span>one moment | wcc</span></div>
+        <div><span class="k">Facebook</span><span>one moment wcc</span></div>
+      </div>
+
+      <div class="travel-areas">
+        <span class="k">Ready to Traveler</span>
+        <div class="area-pills">
+          <span class="area-pill">Banjarnegara</span>
+          <span class="area-pill">Temanggung</span>
+          <span class="area-pill">Magelang</span>
+          <span class="area-pill">Yogyakarta</span>
+          <span class="area-pill">Purbalingga</span>
+          <span class="area-pill">Batang</span>
+          <span class="area-pill">Pekalongan</span>
+          <span class="area-pill">Kebumen</span>
+          <span class="area-pill">Purworejo</span>
+          <span class="area-pill">Banyumas</span>
+          <span class="area-pill">Semarang</span>
+          <span class="area-pill">Cilacap</span>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <div class="form-row">
+        <div class="field">
+          <label for="name">Nama</label>
+          <input type="text" id="name" required placeholder="Nama kamu">
+        </div>
+        <div class="field">
+          <label for="partner">Nama Pasangan</label>
+          <input type="text" id="partner" placeholder="Opsional">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="date">Tanggal Acara</label>
+          <input type="date" id="date" required>
+        </div>
+        <div class="field">
+          <label for="location">Lokasi Acara</label>
+          <input type="text" id="location" required placeholder="Kota / venue">
+        </div>
+      </div>
+      <div class="field">
+        <label for="package">Paket yang Diminati</label>
+        <select id="package">
+          <option value="Full Wedding Moment (850K)">Full Wedding Moment — 850K</option>
+          <option value="Exclusive Moment (700K)">Exclusive Moment — 700K</option>
+          <option value="Premium Moment (650K)">Premium Moment — 650K</option>
+          <option value="Standart Moment (550K)">Standart Moment — 550K</option>
+          <option value="Basic Moment (450K)">Basic Moment — 450K</option>
+          <option value="Engagement Package">Engagement Package</option>
+          <option value="Belum tahu">Belum tahu, mau konsultasi dulu</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Pesan</label>
+        <textarea id="message" placeholder="Ceritakan sedikit tentang acara kalian..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Kirim via WhatsApp</button>
+      <p class="form-note">Form ini akan membuka WhatsApp dengan pesan terisi otomatis — belum ada balasan otomatis.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="mono">© 2026 ONE.MOMENT — WEDDING CONTENT CREATOR, WONOSOBO</div>
+    <div class="footer-links">
+      <a href="https://instagram.com/one.moment.wcc" target="_blank" rel="noopener">Instagram</a>
+      <a href="#kontak">Kontak</a>
+      <a href="#portfolio">Portofolio</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const WA_NUMBER = "6281388813483";
+
+  // Portfolio filter
+  const tabs = document.querySelectorAll('.tab');
+  const cards = document.querySelectorAll('.p-card');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? 'block' : 'none';
+      });
+    });
+  });
+
+  // Package toggle
+  const pkgTabs = document.querySelectorAll('.pkg-tab');
+  pkgTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      pkgTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.pkg-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Contact form -> WhatsApp
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const partner = document.getElementById('partner').value;
+    const date = document.getElementById('date').value;
+    const location = document.getElementById('location').value;
+    const pkg = document.getElementById('package').value;
+    const message = document.getElementById('message').value;
+
+    let text = `Halo ONE.MOMENT, saya ${name}`;
+    if (partner) text += ` & ${partner}`;
+    text += ` ingin booking untuk acara di ${location} pada tanggal ${date}.`;
+    text += ` Paket yang diminati: ${pkg}.`;
+    if (message) text += ` Catatan tambahan: ${message}`;
+
+    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  });
+</script>
+
+</body>
+</html>
